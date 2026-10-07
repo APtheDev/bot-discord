@@ -60,6 +60,12 @@ client.on("messageCreate", (message) => {
 
         message.reply(texte);
     }
+        if (commande === "!salut") {
+
+        let texte = "Pourquoi tu me parle?";
+
+        message.reply(texte);
+    }
 
 });
 
