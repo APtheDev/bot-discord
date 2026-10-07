@@ -20,12 +20,15 @@ async function verifierRappels(client) {
 
         for (const remise of remises) {
 
-            const dateRemise = new Date(
-                remise.date + "T00:00:00"
-            );
+          
+            const dateRemise = new Date(remise.date);
+
+   
+            const dateRemiseJour = new Date(dateRemise);
+            dateRemiseJour.setHours(0, 0, 0, 0);
 
             const differenceMs =
-                dateRemise.getTime() - aujourdHui.getTime();
+                dateRemiseJour.getTime() - aujourdHui.getTime();
 
             const joursRestants = Math.round(
                 differenceMs / (1000 * 60 * 60 * 24)
@@ -35,17 +38,14 @@ async function verifierRappels(client) {
                 `${remise.cours} - ${remise.travail} : ${joursRestants} jours`
             );
 
-            if (
-                joursRestants === 7 ||
-                joursRestants === 3 ||
-                joursRestants === 2 ||
-                joursRestants === 1
-            ) {
+            if (joursRestants < 7) {
 
                 const dateFormatee =
-                    dateRemise.toLocaleDateString("fr-CA", {
+                    dateRemise.toLocaleString("fr-CA", {
                         day: "numeric",
-                        month: "long"
+                        month: "long",
+                        hour: "2-digit",
+                        minute: "2-digit"
                     });
 
                 await channel.send(
@@ -64,7 +64,6 @@ async function verifierRappels(client) {
     }
 }
 
-
 function demarrerRappels(client) {
 
     cron.schedule("0 9 * * *", async () => {
@@ -72,9 +71,7 @@ function demarrerRappels(client) {
     }, {
         timezone: "America/Toronto"
     });
-
 }
-
 
 module.exports = {
     demarrerRappels,
