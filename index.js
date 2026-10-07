@@ -5,7 +5,10 @@ const {
     GatewayIntentBits
 } = require("discord.js");
 
-const { remises, examens } = require("./dates");
+const { commandeRemise } = require("./commands/remise");
+const { commandeExamen } = require("./commands/examen");
+const { commandeSalut, commandeScuse } = require("./commands/salut");
+const { demarrerRappels, verifierRappels } = require("./services/rappels");
 
 const client = new Client({
     intents: [
@@ -17,6 +20,8 @@ const client = new Client({
 
 client.once("ready", () => {
     console.log(`Bot connecté comme ${client.user.tag}`);
+
+    demarrerRappels(client);
 });
 
 client.on("messageCreate", (message) => {
@@ -26,41 +31,23 @@ client.on("messageCreate", (message) => {
     const commande = message.content.toLowerCase().trim();
 
     if (commande === "!remise") {
-
-        let texte = "📚 **Prochaines remises de TP**\n\n";
-
-        remises.forEach(remise => {
-
-            const dateFormatee = new Date(remise.date + "T12:00:00")
-                .toLocaleDateString("fr-CA", {
-                    day: "numeric",
-                    month: "long"
-                });
-
-            texte += `• **${remise.cours}** - ${remise.travail} (${remise.ponderation}) : ${dateFormatee}\n`;
-        });
-
-        message.reply(texte);
+        commandeRemise(message);
     }
 
     if (commande === "!examen") {
-
-        let texte = "📝 **Prochains examens**\n\n";
-
-        examens.forEach(examen => {
-
-            const dateFormatee = new Date(examen.date + "T12:00:00")
-                .toLocaleDateString("fr-CA", {
-                    day: "numeric",
-                    month: "long"
-                });
-
-            texte += `• **${examen.cours}** - ${examen.examen} (${examen.ponderation}) : ${dateFormatee}\n`;
-        });
-
-        message.reply(texte);
+        commandeExamen(message);
     }
 
+    if (commande.includes("salut")) {
+        commandeSalut(message);
+    }
+    if (commande.includes("scuse")){
+        commandeScuse(message);
+    }
+    if (commande === "!testrappel") {
+    console.log("Commande !testrappel reçue");
+    verifierRappels(client);
+    }
 });
 
 client.login(process.env.DISCORD_TOKEN);

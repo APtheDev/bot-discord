@@ -3,25 +3,25 @@ const remises = [
         cours: "Structures discrètes",
         travail: "Devoir #1",
         ponderation: "15 %",
-        date: "2026-10-06"
+        date: "2026-10-06T23:59:00"
     },
     {
         cours: "Génie logiciel",
         travail: "TP1",
         ponderation: "10 %",
-        date: "2026-10-09"
+        date: "2026-10-09T23:59:00"
     },
     {
         cours: "Inforoute",
         travail: "TP1",
         ponderation: "30 %",
-        date: "2026-10-20"
+        date: "2026-10-30T23:00:00"
     },
     {
         cours: "Structures discrètes",
         travail: "Devoir #2",
         ponderation: "15 %",
-        date: "2026-10-29"
+        date: "2026-12-01T23:59:00"
     },
     {
         cours: "Base de donnée II",
