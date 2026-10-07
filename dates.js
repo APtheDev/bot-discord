@@ -6,7 +6,7 @@ const remises = [
         date: "2026-10-06T23:59:00"
     },
     {
-        cours: "Génie logiciel",
+        cours: "Génie logiciel II",
         travail: "TP1",
         ponderation: "10 %",
         date: "2026-10-09T23:59:00"
@@ -30,7 +30,7 @@ const remises = [
         date: "2026-11-13"
     },
     {
-        cours: "Génie logiciel",
+        cours: "Génie logiciel II",
         travail: "TP2",
         ponderation: "10 %",
         date: "2026-11-13"
